@@ -7,6 +7,7 @@ import { getToken } from "@/utilities/utils";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Trash2 } from "lucide-react";
 
 // Select Component
 
@@ -33,7 +34,6 @@ const Cart = () => {
 
   const [paymentMethods, setPaymentMethods] = useState([]);
   const [selectedMethod, setSelectedMethod] = useState("");
-
   //
 
   const fetchCart = async () => {
@@ -247,6 +247,31 @@ const CartItem = ({ item, checked, setSelectedCard }) => {
 
   //
 
+  // DELETE CART ITEMS //
+
+  const handleDeleteItem = async () => {
+    // console.log("Deleting item", item.id);
+
+    try {
+      const token = await getToken();
+      await axios.delete(
+        `https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/delete-cart/${item.id}`,
+        {
+          headers: {
+            apiKey: "24405e01-fbc1-45a5-9f5a-be13afcd757c",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      alert("Item berhasil dibuang!");
+      fetchCart();
+    } catch (error) {
+      console.error("Failed to delete item:", error);
+    }
+  };
+
+  //
+
   const onChangeQuantity = async (type) => {
     let newQuantity = quantity;
 
@@ -296,15 +321,23 @@ const CartItem = ({ item, checked, setSelectedCard }) => {
       </div>
       <div className="flex flex-col items-end justify-between h-full">
         <div className="flex items-center border rounded-md px-2 py-1 mt-4">
-          <button
-            className="text-gray-500 px-2 text-lg"
-            disabled={quantity <= 1 || updating}
-            onClick={() => {
-              onChangeQuantity("decrement");
-            }}
-          >
-            −
-          </button>
+          {quantity === 1 ? (
+            <button
+              className="text-red-500 px-2"
+              onClick={handleDeleteItem}
+              disabled={updating}
+            >
+              <Trash2 size={18} />
+            </button>
+          ) : (
+            <button
+              className="text-gray-500 px-2 text-lg"
+              onClick={() => onChangeQuantity("decrement")}
+              disabled={quantity <= 1 || updating}
+            >
+              −
+            </button>
+          )}
           <span className="px-2">{quantity}</span>
           <button
             className="text-gray-500 px-2 text-lg"
