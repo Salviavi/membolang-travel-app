@@ -69,7 +69,7 @@ export default function DetailActivity() {
       {/* Left Image */}
       <div className="w-full h-full">
         <Image
-          src={activity.imageUrls?.[0] || "/fallback.jpg"}
+          src={activity.imageUrls?.[0] || ""}
           alt={activity.title}
           width={600}
           height={600}

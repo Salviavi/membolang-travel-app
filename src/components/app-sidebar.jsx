@@ -38,11 +38,11 @@ export function AppSidebar({ ...props }) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <VersionSwitcher
+        {/* <VersionSwitcher
           versions={data.versions}
           defaultVersion={data.versions[0]}
-        />
-        <SearchForm />
+        /> */}
+        {/* <SearchForm /> */}
       </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
