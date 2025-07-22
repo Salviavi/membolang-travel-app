@@ -161,6 +161,7 @@ const Cart = () => {
             item={item}
             setSelectedCard={setSelectedCard}
             checked={selectedCard.includes(item.id)}
+            fetchCart={fetchCart}
           />
         ))}
       </div>
@@ -212,7 +213,7 @@ const Cart = () => {
 
 // COMPONENT ITEM CART:
 
-const CartItem = ({ item, checked, setSelectedCard }) => {
+const CartItem = ({ item, checked, setSelectedCard, fetchCart }) => {
   const [quantity, setQuantity] = useState(item.quantity);
   const [updating, setUpdating] = useState(false);
 

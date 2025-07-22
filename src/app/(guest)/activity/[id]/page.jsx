@@ -67,13 +67,13 @@ export default function DetailActivity() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-2 gap-10">
       {/* Left Image */}
-      <div className="w-full h-full">
+      <div className="w-full h-full max-h-[600px] relative rounded-lg overflow-hidden">
         <Image
           src={activity.imageUrls?.[0] || ""}
           alt={activity.title}
-          width={600}
-          height={600}
           className="rounded-lg object-cover w-full h-full max-h-[600px]"
+          priority
+          fill
         />
       </div>
 
